@@ -1,27 +1,43 @@
 "use strict";
 
-// Problem Statement
-// You're building a neural network to predict whether a person will subscribe to a newsletter based on the following factors:
-
-// Age: The person's age.
-// Time Spent on Website: The average time (in minutes) the person spends on the website each day.
-// Training Data
-
-const net = new brain.NeuralNetwork({ hiddenLayers: [3] });
-
-const trainingData = [
-  { input: [0.16, 0.16], output: [1] },
-  { input: [0.25, 0.5], output: [0] },
-  { input: [0.8, 0.8], output: [1] },
-  { input: [0.49, 0.25], output: [0] },
-  { input: [0.16, 0.9], output: [1] },
+const colors = [
+  { green: 0.2, blue: 0.4 },
+  { green: 0.4, blue: 0.6 },
+  { red: 0.2, green: 0.8, blue: 0.8 },
+  { green: 1, blue: 1 },
+  { red: 0.8, green: 1, blue: 1 },
+  { red: 1, green: 1, blue: 1 },
+  { red: 1, green: 0.8, blue: 0.8 },
+  { red: 1, green: 0.6, blue: 0.6 },
+  { red: 1, green: 0.4, blue: 0.4 },
+  { red: 1, green: 0.31, blue: 0.31 },
+  { red: 0.8 },
+  { red: 0.6, green: 0.2, blue: 0.2 },
 ];
 
-net.train(trainingData, {
-  log: (error) => console.log("Error:", error),
-  logPeriod: 100,
-});
+const brightnesses = [
+  { dark: 0.8 },
+  { neutral: 0.8 },
+  { light: 0.7 },
+  { light: 0.8 },
+  { light: 0.9 },
+  { light: 1 },
+  { light: 0.8 },
+  { neutral: 0.7, light: 0.5 },
+  { dark: 0.5, neutral: 0.5 },
+  { dark: 0.6, neutral: 0.3 },
+  { dark: 0.85 },
+  { dark: 0.9 },
+];
 
-const output = net.run([0.49, 0.3]);
+const trainingData = [];
 
-console.log(`will they subscribe ${output[0] > 0.5 ? "yes" : "no"}`);
+for (let i = 0; i < colors.length; i++) {
+  trainingData.push({
+    input: colors[i],
+    output: brightnesses[i],
+  });
+}
+
+
+//
